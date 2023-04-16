@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/reviews', (req, res) => {
   const id = parseInt(req.params.id)
   // find reviews in list
-  if (movieReviews.id == id) {
+  if (movieReviews.id === id) {
     res.status(200).json(movieReviews)
   } else {
     res.status(404).json({
