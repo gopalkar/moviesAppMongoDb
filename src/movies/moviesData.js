@@ -87,7 +87,7 @@ export const movies = {
   ],
   total_pages: 500,
   total_results: 10000
-}
+};
 
 export const movieReviews = {
   id: 527774,
@@ -110,7 +110,7 @@ export const movieReviews = {
   ],
   total_pages: 1,
   total_results: 2
-}
+};
 
 export const movieDetails = {
   adult: false,
@@ -183,4 +183,4 @@ export const movieDetails = {
   video: false,
   vote_average: 8.3,
   vote_count: 2257
-}
+};

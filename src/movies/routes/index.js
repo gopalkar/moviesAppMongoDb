@@ -1,20 +1,20 @@
-import express from 'express'
-import MoviesController from '../controllers'
+import express from 'express';
+import MoviesController from '../controllers';
 
 const createMoviesRouter = (dependencies) => {
-  const router = express.Router()
+  const router = express.Router();
   // load controllers with dependencies
-  const moviesController = MoviesController(dependencies)
+  const moviesController = MoviesController(dependencies);
 
   router.route('/:id')
-    .get(moviesController.getMovie)
+    .get(moviesController.getMovie);
 
   router.route('/')
-    .get(moviesController.find)
+    .get(moviesController.find);
 
   router.route('/upcoming')
-    .get(moviesController.getUpcomingMovies)
+    .get(moviesController.getUpcomingMovies);
 
-  return router
-}
-export default createMoviesRouter
+  return router;
+};
+export default createMoviesRouter;

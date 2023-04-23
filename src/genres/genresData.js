@@ -77,4 +77,4 @@ export const genres = {
       name: 'Western'
     }
   ]
-}
+};
