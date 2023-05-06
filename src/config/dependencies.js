@@ -2,11 +2,13 @@ import AccountsRepositoryInMemory from '../accounts/repositories/InMemoryReposit
 import AccountsRepositoryMongo from '../accounts/repositories/MongoAccountRepository';
 import AccountSchema from '../accounts/validators';
 import Authenticator from '../accounts/security/BCryptAuthenticator';
+import TokenManager from '../accounts/security/JWTToken';
 
 const buildDependencies = () => {
   const dependencies = {
     validators: AccountSchema,
-    authenticator: new Authenticator()
+    authenticator: new Authenticator(),
+    tokenManager: new TokenManager()
   };
 
   dependencies.accountSchema = AccountSchema;

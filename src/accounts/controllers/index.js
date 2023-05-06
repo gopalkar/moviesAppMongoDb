@@ -1,3 +1,4 @@
+import { response } from 'express';
 import accountService from '../services';
 
 export default (dependencies) => {
@@ -62,6 +63,17 @@ export default (dependencies) => {
     }
   };
 
+  const verify = async(request, response, next) => {
+    try {
+        const authHeader = request.headers.authorization;
+        const accessToken = authHeader.split(" ")[1];
+        const user = await accountService.verifyToken(accessToken, dependencies);
+        next();
+    } catch(err) {
+      next(new Error(`Verification Failed ${err.message}`));
+    }
+  };
+
   return {
     authenticateAccount,
     createAccount,
@@ -69,6 +81,7 @@ export default (dependencies) => {
     listAccounts,
     updateAccount,
     addFavourite,
-    getFavourites
+    getFavourites,
+    verify
   };
 };
