@@ -7,6 +7,9 @@ const createRouter = (dependencies) => {
   // load controller with dependencies
   const validationController = ValidationController(dependencies);
   const accountsController = AccountsController(dependencies);
+  router.route('/security/token')
+        .post(accountsController.authenticateAccount);
+        
   router.route('/')
         .post(validationController.validateAccount,accountsController.createAccount); 
 
@@ -21,6 +24,12 @@ const createRouter = (dependencies) => {
 
   router.route('/')
     .put(accountsController.updateAccount);
+
+  router.route('/:id/favourites')
+    .post(accountsController.addFavourite);
+  
+    router.route('/:id/favourites')
+    .get(accountsController.getFavourites);
 
   return router;
 };

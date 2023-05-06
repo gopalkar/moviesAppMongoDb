@@ -5,11 +5,11 @@ export default (dependencies) => {
     const validateAccount = async (request, response, next) => {
         // Input
         try {
-            const validated = await accountSchema['account'].validateAsync(request.body);
-            request.body = validated;
+            //const validated = await accountSchema['account'].validateAsync(request.body);
+            await accountSchema['account'].validateAsync(request.body);
+            //request.body = validated;
             next();
         } catch (err) {
-
             next(new Error(`Invalid Data ${err.message}`));
         }
     };
