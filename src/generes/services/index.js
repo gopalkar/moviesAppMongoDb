@@ -7,6 +7,8 @@ export default {
   },
   getGeneres: ( { generesRepository }) => {
     return generesRepository.get();
+  },
+  deleteGeneres: ( { generesRepository }) => {
+    return generesRepository.remove();
   }
- 
 };

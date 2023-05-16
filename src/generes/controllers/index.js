@@ -12,15 +12,15 @@ export default (dependencies) => {
   };
   const getGeneres = async (request, response, next) => {
     // Treatment
-    const account = await genereService.getGeneres(dependencies);
+    const generes = await genereService.getGeneres(dependencies);
     // output
-    response.status(200).json(account);
+    response.status(200).json(generes);
   };
   const removeGeneres = async (request, response, next) => {
     // Treatment
-    const account = await genereService.removeGeneres(dependencies);
+    const delStatus = await genereService.deleteGeneres(dependencies);
     // output
-    response.status(200).json(account);
+    response.status(200).json(delStatus);
   };
   return {
     createGeneres,

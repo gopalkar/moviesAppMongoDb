@@ -27,8 +27,8 @@ export default class extends GeneresRepository {
         return generesEntity;
     }
 
-    async remove(gName) {
-        return this.model.findOneAndDelete(gName);
+    async remove() {
+        return this.model.deleteMany();
     }
 
     async get() {
