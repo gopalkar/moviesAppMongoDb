@@ -1,5 +1,6 @@
 import AccountsRepositoryInMemory from '../accounts/repositories/InMemoryRepository';
 import AccountsRepositoryMongo from '../accounts/repositories/MongoAccountRepository';
+import GeneresRepositoryMongo from '../generes/repositories/MongoGeneresRepository';
 import AccountSchema from '../accounts/validators';
 import Authenticator from '../accounts/security/BCryptAuthenticator';
 import TokenManager from '../accounts/security/JWTToken';
@@ -17,6 +18,7 @@ const buildDependencies = () => {
     dependencies.accountsRepository = new AccountsRepositoryInMemory();
   } else if (process.env.DATABASE_DIALECT === 'mongo') {
     dependencies.accountsRepository = new AccountsRepositoryMongo();
+    dependencies.generesRepository = new GeneresRepositoryMongo();
   } else if (process.env.DATABASE_DIALECT === 'mysql') {
     throw new Error('Add MySQL support');
   } else {
