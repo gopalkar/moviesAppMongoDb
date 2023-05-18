@@ -7,8 +7,9 @@ export default class extends GeneresRepository {
 
     constructor() {
         super();
+
         const generesSchema = new mongoose.Schema({
-            generes: [{id: Number, name: String}]
+            generes: []
         });
         this.model = mongoose.model('Generes', generesSchema);
     }
@@ -32,7 +33,7 @@ export default class extends GeneresRepository {
     }
 
     async get() {
-        const result = await this.model.find();
-        return new Generes(result);
+        const result = await this.model.find({},{"generes":1});
+        return result;
     }
 }
