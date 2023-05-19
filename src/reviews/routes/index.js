@@ -15,7 +15,7 @@ const createRouter = (dependencies) => {
     .get(reviewsController.getReviews);
 
   router.route('/:id')
-    .get(reviewsController.updateReviews);
+    .put(reviewsController.updateReviews);
 
   return router;
 };

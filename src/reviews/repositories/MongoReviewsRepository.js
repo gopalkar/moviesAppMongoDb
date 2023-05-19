@@ -24,7 +24,6 @@ export default class extends ReviewsRepository {
     }
 
     async persist(reviewsEntity) {
-        console.log(reviewsEntity);
         const { id, results } = reviewsEntity;
         const result = new this.model({id, results});
         await result.save();
@@ -32,18 +31,20 @@ export default class extends ReviewsRepository {
     }
 
     async merge(reviewsEntity) {
-        const {review } = reviewsEntity;
-        await this.model.UpdateOne( { review });
-        console.log({review });
+        const {id, results } = reviewsEntity;
+        await this.model.findOneAndUpdate(id, { results });
         return reviewsEntity;
     }
 
-    async remove() {
-        return this.model.findOneAndDelete();
+    async remove(reviewsEntity) {
+        const {id } = reviewsEntity;
+        return this.model.findOneAndDelete(id);
     }
 
-    async get() {
-        const result = await this.model.find();
-        return new Reviews(result);
+    async get(reviewsEntity) {
+        const mid = reviewsEntity;
+        const reviews = await this.model.findOne({id: mid});
+        const {id, results} = reviews;
+        return new Reviews(id, results);
     }
 }

@@ -6,7 +6,6 @@ export default (dependencies) => {
     // Input
     const { results } = request.body;
     const movieId = request.params.id
-    console.log("controller", request.body.json)
     // Treatment
     const review = await reviewsService.registerReviews(movieId, results, dependencies);
     // output
@@ -14,15 +13,18 @@ export default (dependencies) => {
   };
   const getReviews = async (request, response, next) => {
     // Treatment
-    const review = await reviewsService.getReviews(dependencies);
+    const movieId = request.params.id
+    const review = await reviewsService.getReviews(movieId, dependencies);
     // output
     response.status(200).json(review);
   };
   const updateReviews = async (request, response, next) => {
     // Treatment
-    const delStatus = await reviewsService.deleteReviews(dependencies);
+    const { author, content, created_at, updated_at } = request.body;
+    const movieId = request.params.id
+    const updStatus = await reviewsService.updateReviews(movieId, author, content, created_at, updated_at, dependencies);
     // output
-    response.status(200).json(delStatus);
+    response.status(200).json(updStatus);
   };
   return {
     createReviews,

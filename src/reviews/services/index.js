@@ -5,10 +5,18 @@ export default {
     const review = new Reviews(movieId, results);
     return reviewsRepository.persist(review);
   },
-  getReviews: ( { reviewsRepository }) => {
-    return reviewsRepository.get();
+  getReviews: async ( movieId, { reviewsRepository }) => {
+    const reviews = await reviewsRepository.get(movieId);
+    return reviews;
   },
-  updateReviews: ( { reviewsRepository }) => {
-    return reviewsRepository.update();
-  }
+  updateReviews: async ( movieId, author, content, created_at, updated_at, { reviewsRepository }) => {
+    const reviews = await reviewsRepository.get(movieId);
+    if (reviews) {
+      reviews.results.push({author, content, created_at, updated_at});
+      return await reviewsRepository.merge(reviews);
+    }
+  },
+  deleteReviews: ( movieId, { reviewsRepository }) => {
+    return reviewsRepository.remove(movieId);
+  },
 };
