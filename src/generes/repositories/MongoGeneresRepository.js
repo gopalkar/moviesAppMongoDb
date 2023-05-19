@@ -33,7 +33,7 @@ export default class extends GeneresRepository {
     }
 
     async get() {
-        const result = await this.model.find({},{"generes":1});
+        const result = await this.model.findOne({},{'_id' : 0});
         return result;
     }
 }

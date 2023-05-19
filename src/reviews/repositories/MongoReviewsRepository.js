@@ -25,10 +25,9 @@ export default class extends ReviewsRepository {
 
     async persist(reviewsEntity) {
         console.log(reviewsEntity);
-        const {id, results} = reviewsEntity;
-        const result = new this.model(id, results);
+        const { id, results } = reviewsEntity;
+        const result = new this.model({id, results});
         await result.save();
-        reviewsEntity.results.id = result.results.id;
         return reviewsEntity;
     }
 

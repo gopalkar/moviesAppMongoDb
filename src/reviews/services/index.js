@@ -1,8 +1,8 @@
 import Reviews from '../entities/Reviews';
 
 export default {
-  registerReviews: async (reviews, { reviewsRepository}) => {
-    const review = new Reviews(reviews);
+  registerReviews: async (movieId, results, { reviewsRepository}) => {
+    const review = new Reviews(movieId, results);
     return reviewsRepository.persist(review);
   },
   getReviews: ( { reviewsRepository }) => {
