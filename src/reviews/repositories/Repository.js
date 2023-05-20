@@ -3,15 +3,15 @@ export default class {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  merge (generes) {
+  merge (reviews) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  remove (gName) {
+  remove (reviews) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  get () {
+  get (reviews) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 

@@ -3,17 +3,20 @@ import AccountsRepositoryMongo from '../accounts/repositories/MongoAccountReposi
 import GeneresRepositoryMongo from '../generes/repositories/MongoGeneresRepository';
 import ReviewsRepositoryMongo from '../reviews/repositories/MongoReviewsRepository';
 import AccountSchema from '../accounts/validators';
+import ReviewSchema from '../reviews/validators';
 import Authenticator from '../accounts/security/BCryptAuthenticator';
 import TokenManager from '../accounts/security/JWTToken';
 
 const buildDependencies = () => {
   const dependencies = {
     validators: AccountSchema,
+    reviewValidator: ReviewSchema, 
     authenticator: new Authenticator(),
     tokenManager: new TokenManager()
   };
 
   dependencies.accountSchema = AccountSchema;
+  dependencies.reviewSchema = ReviewSchema;
 
   if (process.env.DATABASE_DIALECT === 'in-memory') {
     dependencies.accountsRepository = new AccountsRepositoryInMemory();

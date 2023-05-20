@@ -31,8 +31,9 @@ export default class extends ReviewsRepository {
     }
 
     async merge(reviewsEntity) {
+        console.log("MergeReviews: ", reviewsEntity);
         const {id, results } = reviewsEntity;
-        await this.model.findOneAndUpdate(id, { results });
+        await this.model.findOneAndUpdate({id: id}, { results: results });
         return reviewsEntity;
     }
 
@@ -43,8 +44,27 @@ export default class extends ReviewsRepository {
 
     async get(reviewsEntity) {
         const mid = reviewsEntity;
+        console.log("getMovieId: ", mid);
         const reviews = await this.model.findOne({id: mid});
-        const {id, results} = reviews;
-        return new Reviews(id, results);
+        if (reviews) {
+            const {id, results} = reviews;
+            return new Reviews(id, results);
+        }
+        else {
+            return reviews;
+        }
+    }
+
+    async getId(reviewsEntity) {
+        const mid = reviewsEntity;
+        console.log("getMovieId: ", mid);
+        const reviews = await this.model.findOne({id: mid});
+        if (reviews) {
+            const { _id } = reviews;
+            return _id;
+        }
+        else {
+            return reviews;
+        }
     }
 }

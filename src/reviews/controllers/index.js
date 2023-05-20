@@ -4,10 +4,10 @@ import reviewsService from '../services';
 export default (dependencies) => {
   const createReviews = async (request, response, next) => {
     // Input
-    const { results } = request.body;
+    const { author, content, created_at, updated_at } = request.body;
     const movieId = request.params.id
     // Treatment
-    const review = await reviewsService.registerReviews(movieId, results, dependencies);
+    const review = await reviewsService.registerReviews(movieId, author, content, created_at, updated_at, dependencies);
     // output
     response.status(201).json(review);
   };
