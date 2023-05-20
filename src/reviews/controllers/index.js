@@ -16,15 +16,25 @@ export default (dependencies) => {
     const movieId = request.params.id
     const review = await reviewsService.getReviews(movieId, dependencies);
     // output
+    // review.results
+    // .map((reviewresults) => reviewresults._id)
+    // .forEach(async (resultsid) => {
+    //     console.log(resultsid);
+    // });
+    //console.log("Reviews: ", review)
     response.status(200).json(review);
   };
   const updateReviews = async (request, response, next) => {
     // Treatment
-    const { author, content, created_at, updated_at } = request.body;
-    const movieId = request.params.id
-    const updStatus = await reviewsService.updateReviews(movieId, author, content, created_at, updated_at, dependencies);
-    // output
-    response.status(200).json(updStatus);
+    try {
+      const { author, content, updated_at } = request.body;
+      const movieId = request.params.id
+      const updStatus = await reviewsService.updateReviews(movieId, author, content, updated_at, dependencies);
+      // output
+      response.status(200).json(updStatus);
+    } catch (err) {
+      next(new Error(`Invalid Data ${err.message}`));
+    }
   };
   return {
     createReviews,

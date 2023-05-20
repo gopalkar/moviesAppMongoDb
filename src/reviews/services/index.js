@@ -17,11 +17,18 @@ export default {
     const reviews = await reviewsRepository.get(movieId);
     return reviews;
   },
-  updateReviews: async ( reviewId, author, content, created_at, updated_at, { reviewsRepository }) => {
-    const reviews = await reviewsRepository.getReview(reviewId);
-    if (reviews) {
-      reviews.results.push({author, content, created_at, updated_at});
-      return await reviewsRepository.merge(reviews);
+  updateReviews: async ( movieId, author, content, updated_at, { reviewsRepository }) => {
+    const review = await reviewsRepository.getReview({movieId, author});
+    const results = review.results;
+    // console.log("Results: ", results);
+    // const rauthor = results.map((results) => results.author);
+    // console.log("RAuthor: ", rauthor);
+    if (results) {
+      const review = {movieId, author, content, updated_at};
+      return await reviewsRepository.updateReview(review);
+    }
+    else {
+      throw new Error("Review for this author Not found");
     }
   },
   deleteReviews: async ( movieId, { reviewsRepository }) => {

@@ -29,7 +29,7 @@ export default {
                     collections
                         .map((collection) => collection.name)
                         .forEach(async (collectionName) => {
-                            console.log(collectionName);
+                            //console.log(collectionName);
                             connection.dropCollection(collectionName);
                         });
                 }

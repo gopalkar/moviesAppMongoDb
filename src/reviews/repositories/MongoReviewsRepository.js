@@ -31,9 +31,19 @@ export default class extends ReviewsRepository {
     }
 
     async merge(reviewsEntity) {
-        console.log("MergeReviews: ", reviewsEntity);
+        //console.log("MergeReviews: ", reviewsEntity);
         const {id, results } = reviewsEntity;
         await this.model.findOneAndUpdate({id: id}, { results: results });
+        return reviewsEntity;
+    }
+
+    async updateReview(reviewsEntity) {
+        const {id, author, content, updated_at } = reviewsEntity;
+        console.log("updated: ", reviewsEntity);
+        await this.model.findOneAndUpdate(
+                ({id: id},
+                {results: {$elemMatch: { author: author}}}), 
+                { $set: { "results.$.content": content, "results.$.updated_at": updated_at }});
         return reviewsEntity;
     }
 
@@ -44,7 +54,7 @@ export default class extends ReviewsRepository {
 
     async get(reviewsEntity) {
         const mid = reviewsEntity;
-        console.log("getMovieId: ", mid);
+        //console.log("getMovieId: ", mid);
         const reviews = await this.model.findOne({id: mid});
         if (reviews) {
             const {id, results} = reviews;
@@ -55,16 +65,14 @@ export default class extends ReviewsRepository {
         }
     }
 
-    async getId(reviewsEntity) {
-        const mid = reviewsEntity;
-        console.log("getMovieId: ", mid);
-        const reviews = await this.model.findOne({id: mid});
-        if (reviews) {
-            const { _id } = reviews;
-            return _id;
-        }
-        else {
-            return reviews;
-        }
+    // {id: "758323"},
+    // {results: {$elemMatch: { author: "testuser3"}}}
+
+    async getReview(reviewsEntity) {
+        const {movieId, author} = reviewsEntity;
+        const reviews = await this.model.findOne(
+            {id: movieId},
+            {results: {$elemMatch: { author: author}}});
+        return reviews 
     }
 }
