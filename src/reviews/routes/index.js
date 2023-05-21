@@ -15,6 +15,9 @@ const createRouter = (dependencies) => {
     .get(reviewsController.getReviews);
 
   router.route('/:id')
+    .delete(reviewsController.removeReviews);
+
+  router.route('/:id')
     .put(validationController.validateUpdReview,reviewsController.updateReviews);
 //validationController.validateUpdReview,
   return router;

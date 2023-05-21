@@ -40,16 +40,19 @@ export default class extends ReviewsRepository {
     async updateReview(reviewsEntity) {
         const {id, author, content, updated_at } = reviewsEntity;
         console.log("updated: ", reviewsEntity);
-        await this.model.findOneAndUpdate(
+        const updResult = await this.model.findOneAndUpdate(
                 ({id: id},
                 {results: {$elemMatch: { author: author}}}), 
                 { $set: { "results.$.content": content, "results.$.updated_at": updated_at }});
-        return reviewsEntity;
+        return updResult;
     }
 
     async remove(reviewsEntity) {
-        const {id } = reviewsEntity;
-        return this.model.findOneAndDelete(id);
+        const {movieId, author} = reviewsEntity;
+        const reviews = await this.model.updateMany( {id: movieId},
+            {$pull: {results: { author: author}}},
+            { multi: true });
+        return reviews 
     }
 
     async get(reviewsEntity) {

@@ -19,11 +19,8 @@ export default {
   },
   updateReviews: async ( movieId, author, content, updated_at, { reviewsRepository }) => {
     const review = await reviewsRepository.getReview({movieId, author});
-    // console.log("Results: ", results);
     // const rauthor = results.map((results) => results.author);
-    // console.log("RAuthor: ", rauthor);
-    if (review) {
-      //const results = review.results;
+    if (review && review.results.length > 0) {
       const review = {movieId, author, content, updated_at};
       return await reviewsRepository.updateReview(review);
     }
@@ -31,7 +28,16 @@ export default {
       throw new Error("Review for this author Not found");
     }
   },
-  deleteReviews: async ( movieId, { reviewsRepository }) => {
-    return await reviewsRepository.remove(movieId);
+  deleteReviews: async ( movieId, author, { reviewsRepository }) => {
+    const review = await reviewsRepository.getReview({movieId, author});
+    console.log("Del Reivew: ", review);
+    if (review) {
+      //const results = review.results;
+      const review = {movieId, author};
+      return await reviewsRepository.remove(review);
+    }
+    else {
+      throw new Error("Review for this author Not found");
+    }
   },
 };

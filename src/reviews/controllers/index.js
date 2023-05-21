@@ -24,6 +24,22 @@ export default (dependencies) => {
     //console.log("Reviews: ", review)
     response.status(200).json(review);
   };
+
+  const removeReviews = async (request, response, next) => {
+    // Treatment
+    const { author } = request.body;
+    const movieId = request.params.id
+    const review = await reviewsService.deleteReviews(movieId, author, dependencies);
+    // output
+    // review.results
+    // .map((reviewresults) => reviewresults._id)
+    // .forEach(async (resultsid) => {
+    //     console.log(resultsid);
+    // });
+    //console.log("Reviews: ", review)
+    response.status(200).json(review);
+  };
+
   const updateReviews = async (request, response, next) => {
     // Treatment
     try {
@@ -40,5 +56,6 @@ export default (dependencies) => {
     createReviews,
     getReviews,
     updateReviews,
+    removeReviews
   };
 };
