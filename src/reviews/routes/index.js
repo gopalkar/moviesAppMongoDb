@@ -9,14 +9,14 @@ const createRouter = (dependencies) => {
   const reviewsController = ReviewsController(dependencies);
 
   router.route('/:id')
-        .post(reviewsController.createReviews); 
+        .post(validationController.validateReview,reviewsController.createReviews); 
 
   router.route('/:id')
     .get(reviewsController.getReviews);
 
   router.route('/:id')
-    .put(reviewsController.updateReviews);
-//validationController.validateReview,
+    .put(validationController.validateUpdReview,reviewsController.updateReviews);
+//validationController.validateUpdReview,
   return router;
 };
 export default createRouter;

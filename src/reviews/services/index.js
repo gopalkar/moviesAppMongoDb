@@ -19,11 +19,11 @@ export default {
   },
   updateReviews: async ( movieId, author, content, updated_at, { reviewsRepository }) => {
     const review = await reviewsRepository.getReview({movieId, author});
-    const results = review.results;
     // console.log("Results: ", results);
     // const rauthor = results.map((results) => results.author);
     // console.log("RAuthor: ", rauthor);
-    if (results) {
+    if (review) {
+      //const results = review.results;
       const review = {movieId, author, content, updated_at};
       return await reviewsRepository.updateReview(review);
     }

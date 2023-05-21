@@ -2,7 +2,7 @@ export default class {
   persist (reviews) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
-
+ 
   merge (reviews) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
@@ -15,4 +15,11 @@ export default class {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
+  getReview (reviews) {
+    throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
+  }
+
+  updateReview (reviews) {
+    throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
+  }
 }
