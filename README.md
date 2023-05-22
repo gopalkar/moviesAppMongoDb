@@ -4,8 +4,6 @@ Name: Karthikeyan Gopal
 
 ## Features.
 
-[A bullet-point list of the ADDITIONAL features/endpoints you have implemented in the API **THAT WERE NOT IN THE LABS** ]. 
-
  + Feature 1 - Load Generes into MongoDB 
 
  + Feature 2 - Get Generes to use the list for Movie Filters
