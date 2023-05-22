@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
     "lint": "eslint --fix --ext .js,.jsx .",
-    "test": "newman run ./tests/movies_collection.json -e ./tests/movies_environment.json --reporters htmlextra,cli --reporter-htmlextra-export ./tests/reports/report.html"
+    "testmovies": "newman run ./tests/movies_collection.json -e ./tests/movies_environment.json --reporters htmlextra,cli --reporter-htmlextra-export ./tests/reports/report.html",
+    "testreviews": "newman run ./tests/reviews_collection.json -e ./tests/movies_environment.json --reporters htmlextra,cli --reporter-htmlextra-export ./tests/reports/Reviewsreport.html"
   },
   "author": "gopalkar",
   "license": "ISC",

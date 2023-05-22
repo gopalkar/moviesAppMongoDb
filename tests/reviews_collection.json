@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "25763bb7-1979-47ae-abb6-6f9546448572",
+		"name": "Reviews API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16185409"
+	},
+	"item": [
+		{
+			"name": "Add New Review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  pm.test(\"Add Review: Successful Response\",()=>pm.response.to.have.status(201))\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.test(\"Add Review: Response Object contains correct properties\",()=>{\r",
+							"    pm.expect(jsonData).to.have.property(\"results\");\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.author).to.eql(pm.collectionVariables.get(\"author\"));\r",
+							"  })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"kargopal@wit.com\",\r\n    \"content\": \"test api post review\",\r\n    \"created_at\": \"2023-05-15T11:12:45\",\r\n    \"updated_at\": \"2023-05-15T11:12:45\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reviews/502356",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"502356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Append Review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  pm.test(\"Append Review: Successful Response\",()=>pm.response.to.have.status(201))\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.test(\"Append Review: Response Object contains correct properties\",()=>{\r",
+							"    pm.expect(jsonData).to.have.property(\"results\");\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.author).to.eql(pm.collectionVariables.get(\"author\"));\r",
+							"  })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"testuser3@wit.com\",\r\n    \"content\": \"add more test review to test api for reviews\",\r\n    \"created_at\": \"2023-05-15T11:12:45.293Z\",\r\n    \"updated_at\": \"2023-05-15T11:12:45.293Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reviews/502356",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"502356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  pm.test(\"Update Review: Successful Response\",()=>pm.response.to.have.status(200))\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.test(\"Update Review: Response Object contains correct properties\",()=>{\r",
+							"    pm.expect(jsonData).to.have.property(\"results\");\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.content).to.eql(pm.collectionVariables.get(\"content\"));\r",
+							"  })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"kargopal@wit.com\",\r\n    \"content\": \"updated review to test api for reviews\",\r\n    \"updated_at\": \"2023-05-21T11:12:45\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reviews/502356",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"502356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  pm.test(\"Get Review: Successful Response\",()=>pm.response.to.have.status(200))\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.test(\"Get Review: Response Object contains correct properties\",()=>{\r",
+							"    pm.expect(jsonData).to.have.property(\"results\");\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.results[0]).to.have.property(\"author\");\r",
+							"  })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reviews/502356",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"502356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Review",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  pm.test(\"Delete Review: Successful Response\",()=>pm.response.to.have.status(200))\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.test(\"Delete Review: Response Object contains correct properties\",()=>{\r",
+							"    pm.expect(jsonData).to.have.property(\"matchedCount\");\r",
+							"    pm.expect(jsonData).to.have.property(\"modifiedCount\");\r",
+							"    pm.expect(jsonData.modifiedCount).to.eql(1);\r",
+							"  })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"testuser3@wit.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reviews/502356",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reviews",
+						"502356"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
