@@ -73,25 +73,16 @@ VITE_TMDB_KEY=???
 | ... | ... | ... | ... | ...
 
 ## Security and Authentication
-[Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected. **REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB]**
-
-[Give details of the routes that have authentication. ]
-
-
+Except Home Page all the other pages are protected. Once you go to Discover App Home page. User login page to register and then login.
 
 ## Validation
 
-[Briefly describe and extra data validation you added to the API, and where it is implemented in the App.]
-
-
+As part of the review Api, added validations to check if the same autor already added a review in the past. if not add review. Else request user to update.
 
 ## Testing
 
-Briefly state how you tested the API. 
-
-Give an example of any automated testing results or link to a report. 
-
-![](./images/tests-image.png)
+![](./tests/reports/Automated test validation.jpg)
+![](./tests/reports/Newman Test Validation for reviews.jpg)
 
 ## Integrating with React App
 
