@@ -15,6 +15,7 @@ export default {
   },
   getReviews: async ( movieId, { reviewsRepository }) => {
     const reviews = await reviewsRepository.get(movieId);
+    console.log("Get Reviews:", reviews);
     return reviews;
   },
   updateReviews: async ( movieId, author, content, updated_at, { reviewsRepository }) => {
