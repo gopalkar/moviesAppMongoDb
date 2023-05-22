@@ -57,19 +57,20 @@ DATABASE_DIALECT=mongo
 DATABASE_URL=mongodb://localhost:27017/movies_db
 JWT_SECRET_KEY=ilikecake
 VITE_TMDB_KEY=???
+```
 
 ## API Design
 [Give an overview of your web API design, perhaps similar to the following: ]
 
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
-| /api/generes |Loads a list of generes | N/A | N/A |
+| /api/generes | N/A |Loads a list of generes | N/A |
 | /api/generes |Gets a list of generes | N/A | N/A |
-| /api/reviews/{movieid} | Add review for a Movie | N/A | N/A | N/A
-| /api/reviews/{movieid} | Append review for a Movie | N/A | N/A | N/A
-| /api/reviews/{movieid} | Update review for a Movie | N/A | N/A | N/A
+| /api/reviews/{movieid} | N/A |Add review for a Movie | N/A | N/A
+| /api/reviews/{movieid} | N/A |Append review for a Movie | N/A | N/A
+| /api/reviews/{movieid} | N/A | N/A |Update review for a Movie | N/A
 | /api/reviews/{movieid} | Get review for a Movie | N/A | N/A | N/A
-| /api/reviews/{movieid} | Delete a review for a Movie | N/A | N/A | N/A
+| /api/reviews/{movieid} | N/A | N/A | N/A | Delete a review for a Movie 
 | ... | ... | ... | ... | ...
 
 ## Security and Authentication
@@ -81,33 +82,64 @@ As part of the review Api, added validations to check if the same autor already 
 
 ## Testing
 
-![](./tests/reports/Automated test validation.jpg)
-![](./tests/reports/Newman Test Validation for reviews.jpg)
+![image](./tests/reports/Automatedtestvalidation.jpg)
+
+![image](./tests/reports/NewmanTestValidationforreviews.jpg)
 
 ## Integrating with React App
 
 [Describe how you integrated your React app with the API. You can provide a link to the React App repo and give an example of an API call from React App. For example: ]
 
 ~~~Javascript
-export const getMovies = () => {
-  return fetch(
-     '/api/movies',{headers: {
-       'Authorization': window.localStorage.getItem('token')
-    }
-  }
-  ).then((res) => res.json());
-};
+export const getAccToken = (email, password) => {
+    return fetch(
+      `/api/accounts/security/token`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({email: email, password: password})
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+      .catch((error) => {
+        throw error
+      });
+  };
+
+  export const signUp = (firstName, lastName, email, password) => {
+    console.log("SignUp Api: ", firstName, lastName, email, password)
+    return fetch(
+      `/api/accounts`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, password: password})
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+      .catch((error) => {
+        throw error
+      });
+  };
+
+  export const getMovieReviews = (id) => {
+    return fetch(
+      `/api/reviews/${id}`, {method: 'get'}
+    )
+      .then((res) => {
+        return res.json();}
+      );
+  };
+  
 
 ~~~
 
-[You can also add images of React app here also if you wish. This can be also shown in the video]
 
-## Extra features
-
-. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
-
-If you deployed to a hosting service/cloud, you should specify here. 
-
-## Independent learning.
-
-. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
